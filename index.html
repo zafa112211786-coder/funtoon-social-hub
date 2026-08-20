@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Growth Hub — All Your Social Links</title>
+<meta name="description" content="All social media channels in one beautiful place. Follow, subscribe and connect.">
+<style>
+:root{--bg:#07111f;--card:#0e1b2d;--card2:#12243b;--text:#f5f8ff;--muted:#9eb0c8;--accent:#6c63ff;--accent2:#00d4ff;--line:#20334d}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,#173a62 0,#07111f 38%),var(--bg);color:var(--text)}
+.container{max-width:1050px;margin:auto;padding:24px}
+.hero{text-align:center;padding:46px 16px 28px}.logo{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;margin:auto;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:35px;font-weight:900;box-shadow:0 15px 50px #0007}
+h1{font-size:clamp(32px,6vw,58px);margin:18px 0 10px}.hero p{color:var(--muted);font-size:18px;margin:0 auto 22px;max-width:700px}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px 18px;border-radius:14px;cursor:pointer;font-weight:700}.primary{background:linear-gradient(135deg,var(--accent),#8d7cff);border:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}.card{background:linear-gradient(180deg,#102139dd,#0b1727ee);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 15px 45px #0003}.card h3{margin:0 0 8px;font-size:21px}.card p{color:var(--muted);margin:0 0 16px}.icon{font-size:30px;margin-bottom:10px}.card a{display:block;text-decoration:none;text-align:center;padding:11px;border-radius:12px;background:#182b45;color:white;font-weight:800}.card a:hover{background:#243d60}
+.section{margin:28px 0}.section h2{text-align:center;font-size:28px;margin-bottom:16px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.tool{padding:18px;border:1px solid var(--line);border-radius:18px;background:#0d1a2b}.tool b{display:block;margin-bottom:6px}.tool span{color:var(--muted);font-size:14px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}input{width:100%;padding:13px;border-radius:12px;border:1px solid var(--line);background:#091524;color:#fff;font-size:15px}label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+.save{margin-top:8px;width:100%}.notice{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+footer{text-align:center;color:var(--muted);padding:35px 10px}
+@media(max-width:650px){form{grid-template-columns:1fr}.full{grid-column:auto}.container{padding:15px}.hero{padding-top:30px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header class="hero">
+  <div class="logo">SG</div>
+  <h1>Social Growth Hub</h1>
+  <p>میرے تمام سوشل میڈیا چینلز ایک جگہ — YouTube، Facebook، Instagram، TikTok اور مزید۔</p>
+  <div class="actions">
+    <button class="btn primary" onclick="document.getElementById('channels').scrollIntoView({behavior:'smooth'})">تمام چینلز دیکھیں</button>
+    <button class="btn" onclick="shareSite()">دوستوں کے ساتھ شیئر کریں</button>
+  </div>
+</header>
+
+<section id="channels" class="section">
+<h2>🚀 میرے سوشل میڈیا چینلز</h2>
+<div class="grid" id="cards"></div>
+</section>
+
+<section class="section">
+<h2>✨ مزید سہولتیں</h2>
+<div class="tools">
+<div class="tool"><b>📣 One‑Click Sharing</b><span>ویب سائٹ کا لنک WhatsApp، Facebook اور دیگر جگہوں پر شیئر کریں۔</span></div>
+<div class="tool"><b>🔗 All Links in One</b><span>تمام پلیٹ فارم ایک خوبصورت صفحے پر۔</span></div>
+<div class="tool"><b>📱 Mobile Friendly</b><span>فون، ٹیبلٹ اور کمپیوٹر پر responsive ڈیزائن۔</span></div>
+<div class="tool"><b>🎯 Clear Call‑to‑Action</b><span>Follow، Subscribe اور Visit بٹن نمایاں انداز میں۔</span></div>
+<div class="tool"><b>📊 Growth Ready</b><span>بعد میں Google Analytics، Meta Pixel اور click tracking شامل کی جا سکتی ہے۔</span></div>
+<div class="tool"><b>🌐 SEO Ready</b><span>Title، description اور social sharing metadata پہلے سے شامل۔</span></div>
+</div>
+</section>
+
+<section class="section card">
+<h2>⚙️ اپنے لنکس تبدیل کریں</h2>
+<form id="linkForm">
+<div><label>YouTube</label><input id="youtube" placeholder="https://youtube.com/@YourChannel"></div>
+<div><label>Facebook</label><input id="facebook" placeholder="https://facebook.com/YourPage"></div>
+<div><label>Instagram</label><input id="instagram" placeholder="https://instagram.com/YourName"></div>
+<div><label>TikTok</label><input id="tiktok" placeholder="https://tiktok.com/@YourName"></div>
+<div><label>WhatsApp Channel</label><input id="whatsapp" placeholder="https://whatsapp.com/channel/..."></div>
+<div><label>Website / Blog</label><input id="website" placeholder="https://example.com"></div>
+<div class="full"><label>Telegram</label><input id="telegram" placeholder="https://t.me/YourChannel"></div>
+<div class="full"><button class="btn primary save" type="submit">💾 لنکس محفوظ کریں</button></div>
+</form>
+<div class="notice">لنکس اسی براؤزر میں محفوظ ہوتے ہیں۔</div>
+</section>
+
+<footer>© <span id="year"></span> Social Growth Hub • Built for creators</footer>
+</div>
+
+<script>
+const defaults={youtube:"#",facebook:"#",instagram:"#",tiktok:"#",whatsapp:"#",website:"#",telegram:"#"};
+const names={youtube:["▶️","YouTube","Subscribe to my channel"],facebook:["📘","Facebook","Follow my page"],instagram:["📸","Instagram","Follow me"],tiktok:["🎵","TikTok","Follow me"],whatsapp:["💬","WhatsApp","Join my channel"],website:["🌐","Website","Visit website"],telegram:["✈️","Telegram","Join channel"]};
+function getLinks(){try{return {...defaults,...JSON.parse(localStorage.getItem("sgh_links")||"{}")}}catch(e){return defaults}}
+function render(){
+ const links=getLinks(), box=document.getElementById("cards");
+ box.innerHTML=Object.keys(names).map(k=>{let v=links[k]||"#";return `<article class="card"><div class="icon">${names[k][0]}</div><h3>${names[k][1]}</h3><p>${names[k][2]}</p><a href="${v}" target="_blank" rel="noopener">${names[k][1]} کھولیں</a></article>`}).join("");
+ Object.keys(names).forEach(k=>document.getElementById(k).value=links[k]==="#"?"":links[k]);
+}
+document.getElementById("linkForm").addEventListener("submit",e=>{e.preventDefault();const data={};Object.keys(names).forEach(k=>data[k]=document.getElementById(k).value.trim()||"#");localStorage.setItem("sgh_links",JSON.stringify(data));render();alert("لنکس محفوظ ہوگئے!");});
+function shareSite(){
+ if(navigator.share) navigator.share({title:"Social Growth Hub",text:"میرے تمام سوشل میڈیا چینلز یہاں دیکھیں",url:location.href});
+ else navigator.clipboard?.writeText(location.href).then(()=>alert("ویب سائٹ کا لنک کاپی ہوگیا۔"));
+}
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body>
+</html>
