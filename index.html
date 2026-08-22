@@ -1,88 +1,495 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Social Growth Hub — All Your Social Links</title>
-<meta name="description" content="All social media channels in one beautiful place. Follow, subscribe and connect.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Easy Way — آسان راستہ</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-:root{--bg:#07111f;--card:#0e1b2d;--card2:#12243b;--text:#f5f8ff;--muted:#9eb0c8;--accent:#6c63ff;--accent2:#00d4ff;--line:#20334d}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,#173a62 0,#07111f 38%),var(--bg);color:var(--text)}
-.container{max-width:1050px;margin:auto;padding:24px}
-.hero{text-align:center;padding:46px 16px 28px}.logo{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;margin:auto;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:35px;font-weight:900;box-shadow:0 15px 50px #0007}
-h1{font-size:clamp(32px,6vw,58px);margin:18px 0 10px}.hero p{color:var(--muted);font-size:18px;margin:0 auto 22px;max-width:700px}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px 18px;border-radius:14px;cursor:pointer;font-weight:700}.primary{background:linear-gradient(135deg,var(--accent),#8d7cff);border:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}.card{background:linear-gradient(180deg,#102139dd,#0b1727ee);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 15px 45px #0003}.card h3{margin:0 0 8px;font-size:21px}.card p{color:var(--muted);margin:0 0 16px}.icon{font-size:30px;margin-bottom:10px}.card a{display:block;text-decoration:none;text-align:center;padding:11px;border-radius:12px;background:#182b45;color:white;font-weight:800}.card a:hover{background:#243d60}
-.section{margin:28px 0}.section h2{text-align:center;font-size:28px;margin-bottom:16px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.tool{padding:18px;border:1px solid var(--line);border-radius:18px;background:#0d1a2b}.tool b{display:block;margin-bottom:6px}.tool span{color:var(--muted);font-size:14px}
-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}input{width:100%;padding:13px;border-radius:12px;border:1px solid var(--line);background:#091524;color:#fff;font-size:15px}label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-.save{margin-top:8px;width:100%}.notice{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
-footer{text-align:center;color:var(--muted);padding:35px 10px}
-@media(max-width:650px){form{grid-template-columns:1fr}.full{grid-column:auto}.container{padding:15px}.hero{padding-top:30px}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7f5;color:#17324d}
+header{background:#087f52;color:white;padding:25px 15px;text-align:center}
+.logo{font-size:34px;font-weight:bold}
+main{max-width:520px;margin:auto;padding:15px}
+.card{background:white;padding:20px;margin:15px 0;border-radius:18px;box-shadow:0 5px 20px #0001}
+input,select{width:100%;padding:14px;margin:7px 0;border:1px solid #ccd6dc;border-radius:10px;font-size:16px}
+button{width:100%;padding:14px;margin-top:8px;border:0;border-radius:11px;font-size:16px;font-weight:bold;cursor:pointer}
+.green{background:#087f52;color:white}
+.yellow{background:#e5a400;color:white}
+.red{background:#d93025;color:white}
+.hidden{display:none}
+.notice{padding:12px;margin-top:10px;background:#e9f7f0;border-radius:10px;line-height:1.7}
+.plan{border:1px solid #ddd;padding:15px;margin:8px 0;border-radius:12px;text-align:center}
+.price{font-size:22px;font-weight:bold;color:#087f52}
+hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 </style>
 </head>
+
 <body>
-<div class="container">
-<header class="hero">
-  <div class="logo">SG</div>
-  <h1>Social Growth Hub</h1>
-  <p>میرے تمام سوشل میڈیا چینلز ایک جگہ — YouTube، Facebook، Instagram، TikTok اور مزید۔</p>
-  <div class="actions">
-    <button class="btn primary" onclick="document.getElementById('channels').scrollIntoView({behavior:'smooth'})">تمام چینلز دیکھیں</button>
-    <button class="btn" onclick="shareSite()">دوستوں کے ساتھ شیئر کریں</button>
-  </div>
+
+<header>
+<div class="logo">🚗 Easy Way</div>
+<div>آسان راستہ — پاکستان کی آسان Ride App</div>
 </header>
 
-<section id="channels" class="section">
-<h2>🚀 میرے سوشل میڈیا چینلز</h2>
-<div class="grid" id="cards"></div>
+<main>
+
+<section id="home" class="card">
+<h2>خوش آمدید</h2>
+<p>Passenger کے لیے سروس مفت ہے۔ Driver package کے ذریعے service فعال کرے گا۔</p>
+
+<button class="green" onclick="showAuth('passenger')">
+👤 Passenger Signup / Login
+</button>
+
+<button class="yellow" onclick="showAuth('driver')">
+🚕 Driver Signup / Login
+</button>
 </section>
 
-<section class="section">
-<h2>✨ مزید سہولتیں</h2>
-<div class="tools">
-<div class="tool"><b>📣 One‑Click Sharing</b><span>ویب سائٹ کا لنک WhatsApp، Facebook اور دیگر جگہوں پر شیئر کریں۔</span></div>
-<div class="tool"><b>🔗 All Links in One</b><span>تمام پلیٹ فارم ایک خوبصورت صفحے پر۔</span></div>
-<div class="tool"><b>📱 Mobile Friendly</b><span>فون، ٹیبلٹ اور کمپیوٹر پر responsive ڈیزائن۔</span></div>
-<div class="tool"><b>🎯 Clear Call‑to‑Action</b><span>Follow، Subscribe اور Visit بٹن نمایاں انداز میں۔</span></div>
-<div class="tool"><b>📊 Growth Ready</b><span>بعد میں Google Analytics، Meta Pixel اور click tracking شامل کی جا سکتی ہے۔</span></div>
-<div class="tool"><b>🌐 SEO Ready</b><span>Title، description اور social sharing metadata پہلے سے شامل۔</span></div>
+
+<section id="auth" class="card hidden">
+
+<h2 id="authTitle">Account</h2>
+
+<input id="name" placeholder="پورا نام">
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<input id="phone" placeholder="موبائل نمبر">
+
+<button class="green" onclick="signup()">📝 Signup</button>
+<button class="yellow" onclick="login()">🔐 Login</button>
+<button class="red" onclick="backHome()">واپس</button>
+
+<div id="authMsg" class="notice hidden"></div>
+
+</section>
+
+
+<section id="passengerPanel" class="card hidden">
+
+<h2>👤 Passenger Panel</h2>
+<div id="passengerUser"></div>
+
+<hr>
+
+<h3>🚗 نئی Ride Request</h3>
+
+<input id="pickup" placeholder="Pickup Location">
+<input id="destination" placeholder="Destination">
+
+<button class="green" onclick="requestRide()">
+🚗 Ride Request کریں
+</button>
+
+<div id="rideMessage" class="notice hidden"></div>
+
+<hr>
+
+<button class="red" onclick="logout()">Logout</button>
+
+</section>
+
+
+<section id="driverPanel" class="card hidden">
+
+<h2>🚕 Driver Panel</h2>
+<div id="driverUser"></div>
+
+<hr>
+
+<h3>🚘 Driver Information</h3>
+
+<input id="vehicle" placeholder="گاڑی کا نام / نمبر">
+
+<button class="yellow" onclick="saveDriverInfo()">
+💾 Driver Information محفوظ کریں
+</button>
+
+<hr>
+
+<h3>💳 Driver Packages</h3>
+
+<div class="plan">
+<b>1 دن</b>
+<div class="price">Rs.100</div>
+24 گھنٹے
 </div>
-</section>
 
-<section class="section card">
-<h2>⚙️ اپنے لنکس تبدیل کریں</h2>
-<form id="linkForm">
-<div><label>YouTube</label><input id="youtube" placeholder="https://youtube.com/@YourChannel"></div>
-<div><label>Facebook</label><input id="facebook" placeholder="https://facebook.com/YourPage"></div>
-<div><label>Instagram</label><input id="instagram" placeholder="https://instagram.com/YourName"></div>
-<div><label>TikTok</label><input id="tiktok" placeholder="https://tiktok.com/@YourName"></div>
-<div><label>WhatsApp Channel</label><input id="whatsapp" placeholder="https://whatsapp.com/channel/..."></div>
-<div><label>Website / Blog</label><input id="website" placeholder="https://example.com"></div>
-<div class="full"><label>Telegram</label><input id="telegram" placeholder="https://t.me/YourChannel"></div>
-<div class="full"><button class="btn primary save" type="submit">💾 لنکس محفوظ کریں</button></div>
-</form>
-<div class="notice">لنکس اسی براؤزر میں محفوظ ہوتے ہیں۔</div>
-</section>
-
-<footer>© <span id="year"></span> Social Growth Hub • Built for creators</footer>
+<div class="plan">
+<b>3 دن</b>
+<div class="price">Rs.300</div>
+3 دن
 </div>
+
+<div class="plan">
+<b>10 دن</b>
+<div class="price">Rs.1,000</div>
+10 دن
+</div>
+
+<div class="plan">
+<b>30 دن</b>
+<div class="price">Rs.3,000</div>
+30 دن
+</div>
+
+<select id="package">
+<option value="1">1 دن — Rs.100</option>
+<option value="3">3 دن — Rs.300</option>
+<option value="10">10 دن — Rs.1,000</option>
+<option value="30">30 دن — Rs.3,000</option>
+</select>
+
+<button class="yellow" onclick="activatePackage()">
+💳 Package Activate
+</button>
+
+<div id="packageMessage" class="notice hidden"></div>
+
+<hr>
+
+<h3>📍 Ride Requests</h3>
+<div id="driverRides">ابھی کوئی ride request نہیں۔</div>
+
+<button class="red" onclick="logout()">Logout</button>
+
+</section>
+
+</main>
+
 
 <script>
-const defaults={youtube:"#",facebook:"#",instagram:"#",tiktok:"#",whatsapp:"#",website:"#",telegram:"#"};
-const names={youtube:["▶️","YouTube","Subscribe to my channel"],facebook:["📘","Facebook","Follow my page"],instagram:["📸","Instagram","Follow me"],tiktok:["🎵","TikTok","Follow me"],whatsapp:["💬","WhatsApp","Join my channel"],website:["🌐","Website","Visit website"],telegram:["✈️","Telegram","Join channel"]};
-function getLinks(){try{return {...defaults,...JSON.parse(localStorage.getItem("sgh_links")||"{}")}}catch(e){return defaults}}
-function render(){
- const links=getLinks(), box=document.getElementById("cards");
- box.innerHTML=Object.keys(names).map(k=>{let v=links[k]||"#";return `<article class="card"><div class="icon">${names[k][0]}</div><h3>${names[k][1]}</h3><p>${names[k][2]}</p><a href="${v}" target="_blank" rel="noopener">${names[k][1]} کھولیں</a></article>`}).join("");
- Object.keys(names).forEach(k=>document.getElementById(k).value=links[k]==="#"?"":links[k]);
+
+/* =================================================
+   SUPABASE CONNECTION
+   ================================================= */
+
+/* آپ کا Easy Way Project URL */
+const SUPABASE_URL =
+"https://zxkxwbxnzjxtxrglolgv.supabase.co";
+
+
+/* =================================================
+   صرف یہاں اپنی Pusb_publishable_PSRJeZOBggWD6AtZgNtt3A_g6rGvDXPblishable Key ڈالنی ہے
+   ================================================= */
+
+const SUPABASE_PUBLISHABLE_KEY =
+"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =================================================
+   APP
+   ================================================= */
+
+let selectedRole="passenger";
+
+
+function showAuth(role){
+
+selectedRole=role;
+
+document.getElementById("home").classList.add("hidden");
+document.getElementById("auth").classList.remove("hidden");
+
+document.getElementById("authTitle").textContent=
+role==="driver"
+?"🚕 Driver Signup / Login"
+:"👤 Passenger Signup / Login";
+
 }
-document.getElementById("linkForm").addEventListener("submit",e=>{e.preventDefault();const data={};Object.keys(names).forEach(k=>data[k]=document.getElementById(k).value.trim()||"#");localStorage.setItem("sgh_links",JSON.stringify(data));render();alert("لنکس محفوظ ہوگئے!");});
-function shareSite(){
- if(navigator.share) navigator.share({title:"Social Growth Hub",text:"میرے تمام سوشل میڈیا چینلز یہاں دیکھیں",url:location.href});
- else navigator.clipboard?.writeText(location.href).then(()=>alert("ویب سائٹ کا لنک کاپی ہوگیا۔"));
+
+
+function backHome(){
+
+document.getElementById("auth").classList.add("hidden");
+document.getElementById("home").classList.remove("hidden");
+
 }
-document.getElementById("year").textContent=new Date().getFullYear();render();
+
+
+async function signup(){
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const phone=document.getElementById("phone").value.trim();
+const msg=document.getElementById("authMsg");
+
+if(!name||!email||!password){
+
+showMessage(msg,"براہ کرم نام، Email اور Password درج کریں۔");
+return;
+
+}
+
+if(password.length<6){
+
+showMessage(msg,"Password کم از کم 6 حروف کا ہونا چاہیے۔");
+return;
+
+}
+
+
+const {data,error}=await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+name:name,
+phone:phone,
+role:selectedRole
+}
+}
+
+});
+
+
+if(error){
+
+showMessage(msg,"❌ "+error.message);
+return;
+
+}
+
+
+if(data.session){
+
+showMessage(msg,"✅ Signup کامیاب ہوگیا۔");
+await loadUser();
+
+}else{
+
+showMessage(
+msg,
+"✅ Signup کامیاب ہوگیا۔ اگر Email verification مانگی جائے تو اپنی Email verify کریں، پھر Login کریں۔"
+);
+
+}
+
+}
+
+
+async function login(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const msg=document.getElementById("authMsg");
+
+if(!email||!password){
+
+showMessage(msg,"Email اور Password درج کریں۔");
+return;
+
+}
+
+
+const {error}=await supabaseClient.auth.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+
+if(error){
+
+showMessage(msg,"❌ Login Error: "+error.message);
+return;
+
+}
+
+await loadUser();
+
+}
+
+
+async function loadUser(){
+
+const {data:{user}}=
+await supabaseClient.auth.getUser();
+
+if(!user)return;
+
+const role=
+user.user_metadata?.role||"passenger";
+
+
+document.getElementById("home")
+.classList.add("hidden");
+
+document.getElementById("auth")
+.classList.add("hidden");
+
+
+if(role==="driver"){
+
+document.getElementById("driverPanel")
+.classList.remove("hidden");
+
+document.getElementById("driverUser").innerHTML=
+"خوش آمدید، "+
+(user.user_metadata?.name||"Driver");
+
+}else{
+
+document.getElementById("passengerPanel")
+.classList.remove("hidden");
+
+document.getElementById("passengerUser").innerHTML=
+"خوش آمدید، "+
+(user.user_metadata?.name||"Passenger");
+
+}
+
+}
+
+
+function requestRide(){
+
+const pickup=
+document.getElementById("pickup").value.trim();
+
+const destination=
+document.getElementById("destination").value.trim();
+
+const msg=
+document.getElementById("rideMessage");
+
+
+if(!pickup||!destination){
+
+showMessage(
+msg,
+"براہ کرم Pickup اور Destination درج کریں۔"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"easyway_ride",
+JSON.stringify({
+pickup:pickup,
+destination:destination,
+status:"requested"
+})
+);
+
+
+showMessage(
+msg,
+"✅ Ride request تیار ہوگئی ہے۔"
+);
+
+}
+
+
+function saveDriverInfo(){
+
+const vehicle=
+document.getElementById("vehicle").value.trim();
+
+if(!vehicle){
+
+alert("گاڑی کا نام یا نمبر درج کریں۔");
+return;
+
+}
+
+localStorage.setItem(
+"easyway_vehicle",
+vehicle
+);
+
+alert("✅ Driver information محفوظ ہوگئی۔");
+
+}
+
+
+function activatePackage(){
+
+const days=
+Number(document.getElementById("package").value);
+
+const prices={
+1:100,
+3:300,
+10:1000,
+30:3000
+};
+
+
+const expiry=
+Date.now()+
+days*24*60*60*1000;
+
+
+localStorage.setItem(
+"easyway_package_expiry",
+expiry
+);
+
+
+const msg=
+document.getElementById("packageMessage");
+
+
+msg.classList.remove("hidden");
+
+msg.innerHTML=
+"🟢 Package Active<br>"+
+"مدت: "+days+" دن<br>"+
+"Price: Rs."+prices[days];
+
+}
+
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+location.reload();
+
+}
+
+
+function showMessage(element,text){
+
+element.innerHTML=text;
+element.classList.remove("hidden");
+
+}
+
+
+/* پہلے سے Login ہو تو Account کھولیں */
+
+supabaseClient.auth.getSession()
+.then(async({data})=>{
+
+if(data.session){
+
+await loadUser();
+
+}
+
+});
+
 </script>
+
 </body>
 </html>
