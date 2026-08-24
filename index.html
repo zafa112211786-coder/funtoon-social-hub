@@ -1,3 +1,5 @@
+Easy Way — آسان راستہ
+
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -49,7 +51,6 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 </button>
 </section>
 
-
 <section id="auth" class="card hidden">
 
 <h2 id="authTitle">Account</h2>
@@ -66,7 +67,6 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <div id="authMsg" class="notice hidden"></div>
 
 </section>
-
 
 <section id="passengerPanel" class="card hidden">
 
@@ -91,7 +91,6 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <button class="red" onclick="logout()">Logout</button>
 
 </section>
-
 
 <section id="driverPanel" class="card hidden">
 
@@ -147,8 +146,9 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 💳 Package Activate
 </button>
 
+<div id="packageMessage" class="notice hidden"></div>
 
-
+<hr>
 
 <h3>📍 Ride Requests</h3>
 <div id="driverRides">ابھی کوئی ride request نہیں۔</div>
@@ -159,25 +159,17 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 
 </main>
 
-
 <script>
 
-/* =================================================
+/* ===============================
    SUPABASE CONNECTION
-   ================================================= */
+   =============================== */
 
-/* آپ کا Easy Way Project URL */
 const SUPABASE_URL =
 "https://zxkxwbxnzjxtxrglolgv.supabase.co";
 
-
-/* =================================================
-   const SUPABASE_PUBLISHABLE_KEY ="sb_publishable_PSRJeZOBggWD6AtZgNtt3A_g6rGvDXP";
-   ================================================= */
-
-const SUPABASE_PUBLISHABLE_KEY 
-
-const SUPABASE_PUBLISHABLE_KEY ="sb_publishable_PSRJeZOBggWD6AtZgNtt3A_g6rGvDXP";
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_PSRJeZOBggWD6AtZgNtt3A_g6rGvDXP";
 
 const supabaseClient =
 window.supabase.createClient(
@@ -186,9 +178,9 @@ SUPABASE_PUBLISHABLE_KEY
 );
 
 
-/* =================================================
+/* ===============================
    APP
-   ================================================= */
+   =============================== */
 
 let selectedRole="passenger";
 
@@ -197,10 +189,14 @@ function showAuth(role){
 
 selectedRole=role;
 
-document.getElementById("home").classList.add("hidden");
-document.getElementById("auth").classList.remove("hidden");
+document.getElementById("home")
+.classList.add("hidden");
 
-document.getElementById("authTitle").textContent=
+document.getElementById("auth")
+.classList.remove("hidden");
+
+document.getElementById("authTitle")
+.textContent =
 role==="driver"
 ?"🚕 Driver Signup / Login"
 :"👤 Passenger Signup / Login";
@@ -210,36 +206,57 @@ role==="driver"
 
 function backHome(){
 
-document.getElementById("auth").classList.add("hidden");
-document.getElementById("home").classList.remove("hidden");
+document.getElementById("auth")
+.classList.add("hidden");
+
+document.getElementById("home")
+.classList.remove("hidden");
 
 }
 
 
 async function signup(){
 
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
-const phone=document.getElementById("phone").value.trim();
-const msg=document.getElementById("authMsg");
+const name =
+document.getElementById("name").value.trim();
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const msg =
+document.getElementById("authMsg");
+
 
 if(!name||!email||!password){
 
-showMessage(msg,"براہ کرم نام، Email اور Password درج کریں۔");
-return;
+showMessage(
+msg,
+"براہ کرم نام، Email اور Password درج کریں۔"
+);
 
+return;
 }
+
 
 if(password.length<6){
 
-showMessage(msg,"Password کم از کم 6 حروف کا ہونا چاہیے۔");
-return;
+showMessage(
+msg,
+"Password کم از کم 6 حروف کا ہونا چاہیے۔"
+);
 
+return;
 }
 
 
-const {data,error}=await supabaseClient.auth.signUp({
+const {data,error} =
+await supabaseClient.auth.signUp({
 
 email:email,
 
@@ -258,22 +275,29 @@ role:selectedRole
 
 if(error){
 
-showMessage(msg,"❌ "+error.message);
-return;
+showMessage(
+msg,
+"❌ "+error.message
+);
 
+return;
 }
 
 
 if(data.session){
 
-showMessage(msg,"✅ Signup کامیاب ہوگیا۔");
+showMessage(
+msg,
+"✅ Signup کامیاب ہوگیا۔"
+);
+
 await loadUser();
 
 }else{
 
 showMessage(
 msg,
-"✅ Signup کامیاب ہوگیا۔ اگر Email verification مانگی جائے تو اپنی Email verify کریں، پھر Login کریں۔"
+"✅ Signup کامیاب ہوگیا۔ اگر Email verification مانگی جائے تو Email verify کریں، پھر Login کریں۔"
 );
 
 }
@@ -283,19 +307,29 @@ msg,
 
 async function login(){
 
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
-const msg=document.getElementById("authMsg");
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+const msg =
+document.getElementById("authMsg");
+
 
 if(!email||!password){
 
-showMessage(msg,"Email اور Password درج کریں۔");
-return;
+showMessage(
+msg,
+"Email اور Password درج کریں۔"
+);
 
+return;
 }
 
 
-const {error}=await supabaseClient.auth.signInWithPassword({
+const {error} =
+await supabaseClient.auth.signInWithPassword({
 
 email:email,
 password:password
@@ -305,10 +339,14 @@ password:password
 
 if(error){
 
-showMessage(msg,"❌ Login Error: "+error.message);
-return;
+showMessage(
+msg,
+"❌ Login Error: "+error.message
+);
 
+return;
 }
+
 
 await loadUser();
 
@@ -317,12 +355,14 @@ await loadUser();
 
 async function loadUser(){
 
-const {data:{user}}=
+const {data:{user}} =
 await supabaseClient.auth.getUser();
+
 
 if(!user)return;
 
-const role=
+
+const role =
 user.user_metadata?.role||"passenger";
 
 
@@ -338,7 +378,8 @@ if(role==="driver"){
 document.getElementById("driverPanel")
 .classList.remove("hidden");
 
-document.getElementById("driverUser").innerHTML=
+document.getElementById("driverUser")
+.innerHTML =
 "خوش آمدید، "+
 (user.user_metadata?.name||"Driver");
 
@@ -347,7 +388,8 @@ document.getElementById("driverUser").innerHTML=
 document.getElementById("passengerPanel")
 .classList.remove("hidden");
 
-document.getElementById("passengerUser").innerHTML=
+document.getElementById("passengerUser")
+.innerHTML =
 "خوش آمدید، "+
 (user.user_metadata?.name||"Passenger");
 
@@ -358,13 +400,15 @@ document.getElementById("passengerUser").innerHTML=
 
 function requestRide(){
 
-const pickup=
-document.getElementById("pickup").value.trim();
+const pickup =
+document.getElementById("pickup")
+.value.trim();
 
-const destination=
-document.getElementById("destination").value.trim();
+const destination =
+document.getElementById("destination")
+.value.trim();
 
-const msg=
+const msg =
 document.getElementById("rideMessage");
 
 
@@ -376,7 +420,6 @@ msg,
 );
 
 return;
-
 }
 
 
@@ -400,20 +443,24 @@ msg,
 
 function saveDriverInfo(){
 
-const vehicle=
-document.getElementById("vehicle").value.trim();
+const vehicle =
+document.getElementById("vehicle")
+.value.trim();
+
 
 if(!vehicle){
 
 alert("گاڑی کا نام یا نمبر درج کریں۔");
-return;
 
+return;
 }
+
 
 localStorage.setItem(
 "easyway_vehicle",
 vehicle
 );
+
 
 alert("✅ Driver information محفوظ ہوگئی۔");
 
@@ -422,8 +469,11 @@ alert("✅ Driver information محفوظ ہوگئی۔");
 
 function activatePackage(){
 
-const days=
-Number(document.getElementById("package").value);
+const days =
+Number(
+document.getElementById("package").value
+);
+
 
 const prices={
 1:100,
@@ -433,7 +483,7 @@ const prices={
 };
 
 
-const expiry=
+const expiry =
 Date.now()+
 days*24*60*60*1000;
 
@@ -444,13 +494,14 @@ expiry
 );
 
 
-const msg=
+const msg =
 document.getElementById("packageMessage");
 
 
 msg.classList.remove("hidden");
 
-msg.innerHTML=
+
+msg.innerHTML =
 "🟢 Package Active<br>"+
 "مدت: "+days+" دن<br>"+
 "Price: Rs."+prices[days];
@@ -470,6 +521,7 @@ location.reload();
 function showMessage(element,text){
 
 element.innerHTML=text;
+
 element.classList.remove("hidden");
 
 }
@@ -491,4 +543,4 @@ await loadUser();
 </script>
 
 </body>
-</html>
+   </html>
